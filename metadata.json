@@ -1,0 +1,5 @@
+{
+  "name": "System Design Deconstructed",
+  "description": "An interactive web application that breaks down the system design process for a simple React component, from pseudo-code to the final interactive demo.",
+  "requestFramePermissions": []
+}
