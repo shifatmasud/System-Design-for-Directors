@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Plus, Minus } from 'phosphor-react';
 
 type ControlButtonProps = {
@@ -39,13 +39,6 @@ const ControlButton: React.FC<ControlButtonProps> = ({ onClick, children, ariaLa
 
 export const InteractiveDemo = () => {
     const [count, setCount] = useState(0);
-    const prevCountRef = useRef(0);
-    const [direction, setDirection] = useState(1);
-
-    useEffect(() => {
-        setDirection(count > prevCountRef.current ? 1 : -1);
-        prevCountRef.current = count;
-    }, [count]);
 
     const sectionStyle: React.CSSProperties = {
         background: '#0A0A0A',
@@ -56,13 +49,11 @@ export const InteractiveDemo = () => {
     };
 
     const numberContainerStyle: React.CSSProperties = {
-        position: 'relative',
         height: '64px',
         width: '120px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        overflow: 'hidden',
         background: '#000000',
         borderRadius: '8px',
         border: '1px solid #222222',
@@ -74,24 +65,6 @@ export const InteractiveDemo = () => {
         fontWeight: '700',
         fontFamily: "'Roboto Mono', monospace",
         color: '#FFFFFF',
-        position: 'absolute',
-    };
-
-    const variants = {
-        enter: (direction: number) => ({
-            y: direction * 20,
-            opacity: 0,
-        }),
-        center: {
-            zIndex: 1,
-            y: 0,
-            opacity: 1,
-        },
-        exit: (direction: number) => ({
-            zIndex: 0,
-            y: -direction * 20,
-            opacity: 0,
-        }),
     };
 
     return (
@@ -103,24 +76,9 @@ export const InteractiveDemo = () => {
                 </ControlButton>
                 
                 <div style={numberContainerStyle}>
-                    <AnimatePresence initial={false} custom={direction}>
-                        <motion.span
-                            key={count}
-                            style={numberStyle}
-                            variants={variants}
-                            initial="enter"
-                            animate="center"
-                            exit="exit"
-                            custom={direction}
-                            transition={{
-                                y: { type: "spring", stiffness: 300, damping: 30 },
-                                opacity: { duration: 0.2 },
-                            }}
-                            aria-live="polite"
-                        >
-                            {count}
-                        </motion.span>
-                    </AnimatePresence>
+                    <span style={numberStyle} aria-live="polite">
+                        {count}
+                    </span>
                 </div>
 
                 <ControlButton onClick={() => setCount(c => c + 1)} ariaLabel="Increment">
