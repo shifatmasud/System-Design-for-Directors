@@ -110,24 +110,26 @@ export default function App() {
     };
     
     const titleStyle: React.CSSProperties = {
-        fontSize: isMobile ? '24px' : '32px',
+        fontSize: isMobile ? '48px' : '72px',
         fontWeight: 700,
         color: '#FFFFFF',
-        lineHeight: '1.2',
-        marginBottom: '8px'
+        lineHeight: isMobile ? 1.2 : 1.05,
+        marginBottom: '24px'
     };
 
     const subtitleStyle: React.CSSProperties = {
-        fontSize: isMobile ? '16px' : '18px',
-        color: '#888888',
-        lineHeight: '1.5',
-        maxWidth: '60ch'
+        fontSize: '16px',
+        color: '#A0A0A0',
+        lineHeight: 1.6,
+        maxWidth: isMobile ? undefined : '60ch'
     };
 
     const Header = () => (
         <header style={headerStyle}>
-            <h1 style={titleStyle}>System Design Deconstructed</h1>
-            <p style={subtitleStyle}>An interactive breakdown of the system design process for a simple React component, from pseudo-code to final product.</p>
+            <h1 style={titleStyle}>
+                System Design Tools
+            </h1>
+            <p style={subtitleStyle}>Ever feel like system design is a language you're supposed to know, but don't quite speak? We're here for that 'aha!' moment. Transform confusion into clarity and theory into intuition with hands-on tools that make complex ideas finally click.</p>
         </header>
     );
 
